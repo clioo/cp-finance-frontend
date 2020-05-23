@@ -5,9 +5,11 @@ import theme from './ui/Theme';
 
 class App extends Component {
   render() {
+    const isUserLogged = false;
+
     return (
       <ThemeProvider theme={theme}>
-        <Header margin={theme.spacing}></Header>
+        <Header isUserLogged={isUserLogged} margin={theme.spacing}></Header>
         {[...new Array(20)]
                         .map(
                         () => `Cras mattis consectetur purus sit amet fermentum.

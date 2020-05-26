@@ -56,7 +56,13 @@ const drawerList = (props) => {
 
   const items = (props.isUserLogged ? loggedItems : notLoggedInItems).map(
     (item, index) => (
-      <ListItem button key={'drawerItem-' + index.toString()}>
+      <ListItem
+        button
+        key={"drawerItem-" + index.toString()}
+        index={index}
+        selected={props.selectedItemIndex === index}
+        onClick={props.handleListItemClick.bind(this, index)}
+      >
         <ListItemIcon>{React.createElement(item.icon)}</ListItemIcon>
         <ListItemText primary={item.text} />
       </ListItem>

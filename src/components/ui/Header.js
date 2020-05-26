@@ -10,17 +10,14 @@ import Drawer from '@material-ui/core/Drawer';
 import DrawerList from './DrawerList';
 import Logo from './Logo';
 import ElevationScroll from './ElevationScroll';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 //Create a css file
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginBottom: '5em',
     flexGrow: 1,
   },
   menuButton: {
@@ -32,28 +29,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const buttonAppBar = (props) => {
+const header = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
     anchorEl: null,
-    mobileMoreAnchorEl: null
+    mobileMoreAnchorEl: null,
+    selectedIndex: -1
   });
 
+  let selectedIndex = state.selectedIndex;
+
   const isMenuOpen = Boolean(state.anchorEl);
-  const isMobileMenuOpen = Boolean(state.mobileMoreAnchorEl);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
-    setState({ ...state, left: open });
+    setState({ ...state, left: open, selectedIndex: selectedIndex});
   };
 
-  const signUpButton = () => (
-    <Button color="inherit">Sign Up</Button>
-  );
+  const handleListItemClick = (index) => {
+    selectedIndex = index
+  };
 
   const handleProfileMenuOpen = (event) => {
     if (props.isUserLogged)
@@ -67,12 +65,14 @@ const buttonAppBar = (props) => {
 
   };
 
+
+
   const handleMenuClose = () => {
     setState({...state, anchorEl: null});
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
+  const profileRenderMenu = (
     <Menu
       anchorEl={state.anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -110,6 +110,8 @@ const buttonAppBar = (props) => {
               <DrawerList
                 isUserLogged={props.isUserLogged}
                 toggleDrawer={toggleDrawer}
+                handleListItemClick={handleListItemClick.bind(state.selectedIndex)}
+                selectedItemIndex={state.selectedIndex}
               />
             </Drawer>
 
@@ -130,9 +132,9 @@ const buttonAppBar = (props) => {
           </Toolbar>
         </ElevationScroll>
       </AppBar>
-      {props.isUserLogged ? renderMenu : null}
+      {props.isUserLogged ? profileRenderMenu : null}
     </div>
   );
 }
 
-export default buttonAppBar
+export default header

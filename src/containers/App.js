@@ -3,7 +3,9 @@ import Header from '../components/ui/Header';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../components/ui/Theme';
 import NotLoggedInBody from '../components/Body/NotLoggedBody';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Footer from '../components/ui/Footer';
 
 class App extends Component {
   render() {
@@ -11,6 +13,7 @@ class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <BrowserRouter>
           <Header isUserLogged={isUserLogged} margin={theme.spacing}></Header>
           <Switch>
@@ -23,6 +26,7 @@ class App extends Component {
             <Route exact path="/" component={isUserLogged ? null : NotLoggedInBody} />
           </Switch>
         </BrowserRouter>
+        <Footer />
       </ThemeProvider>
     );
   }

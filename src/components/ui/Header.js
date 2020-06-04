@@ -1,23 +1,24 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
-import DrawerList from './DrawerList';
-import Logo from './Logo';
-import ElevationScroll from './ElevationScroll';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Drawer from "@material-ui/core/Drawer";
+import DrawerList from "./DrawerList";
+import Logo from "./Logo";
+import ElevationScroll from "./ElevationScroll";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //Create a css file
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: '5em',
+    marginBottom: "5em",
     flexGrow: 1,
   },
   menuButton: {
@@ -28,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const header = (props) => {
+  let history = useHistory();
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
     anchorEl: null,
     mobileMoreAnchorEl: null,
-    selectedIndex: -1
+    selectedIndex: -1,
   });
 
   let selectedIndex = state.selectedIndex;
@@ -43,42 +44,42 @@ const header = (props) => {
   const isMenuOpen = Boolean(state.anchorEl);
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
-    setState({ ...state, left: open, selectedIndex: selectedIndex});
+    setState({ ...state, left: open, selectedIndex: selectedIndex });
   };
 
   const handleListItemClick = (index) => {
-    selectedIndex = index
+    selectedIndex = index;
+    history.push("/signUp");
   };
 
   const handleProfileMenuOpen = (event) => {
-    if (props.isUserLogged)
-    {
-      setState({...state, anchorEl: event.currentTarget});
+    if (props.isUserLogged) {
+      setState({ ...state, anchorEl: event.currentTarget });
+    } else {
+      // Need to avoid to spam the stach
+      if (history.location.pathname === "/signUp") return;
+      history.push("/signUp");
     }
-    else {
-      //TO:DO handle sign up here
-      console.log('handle sign up to be continued');
-    }
-
   };
-
-
 
   const handleMenuClose = () => {
-    setState({...state, anchorEl: null});
+    setState({ ...state, anchorEl: null });
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const profileRenderMenu = (
     <Menu
       anchorEl={state.anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -110,13 +111,18 @@ const header = (props) => {
               <DrawerList
                 isUserLogged={props.isUserLogged}
                 toggleDrawer={toggleDrawer}
-                handleListItemClick={handleListItemClick.bind(state.selectedIndex)}
+                handleListItemClick={handleListItemClick.bind(
+                  state.selectedIndex
+                )}
                 selectedItemIndex={state.selectedIndex}
+                currentLocation={history.location.pathname}
               />
             </Drawer>
 
             <Typography variant="h6" className={classes.title}>
-              <Logo height="3em" />
+              <Link to="/">
+                <Logo height="3em" />
+              </Link>
             </Typography>
             <div>
               <IconButton
@@ -135,6 +141,6 @@ const header = (props) => {
       {props.isUserLogged ? profileRenderMenu : null}
     </div>
   );
-}
+};
 
-export default header
+export default header;

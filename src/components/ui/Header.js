@@ -53,9 +53,9 @@ const header = (props) => {
     setState({ ...state, left: open, selectedIndex: selectedIndex });
   };
 
-  const handleListItemClick = (index) => {
+  const handleListItemClick = (item, index) => {
     selectedIndex = index;
-    history.push("/signUp");
+    history.push(item.linkTo);
   };
 
   const handleProfileMenuOpen = (event) => {

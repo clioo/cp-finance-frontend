@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from "../components/ui/Footer";
 import SignUp from "../components/User/SignUp";
 import { makeStyles } from "@material-ui/core/styles";
+import SignIn from '../components/User/SignIn';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,7 @@ const app = (props) => {
             <Route
               exact
               path="/signIn"
-              component={isUserLogged ? null : NotLoggedInBody}
+              component={isUserLogged ? null : SignIn}
             />
             <Route
               exact

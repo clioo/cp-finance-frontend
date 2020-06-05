@@ -26,6 +26,19 @@ const notLoggedBody = () => {
           text={"Sign up"}
           size={"large"}
         />
+        <Grid container justify="center">
+          <h3>Do you have an account?</h3>
+        </Grid>
+        <Grid container justify="center">
+          <Button
+            component={Link}
+            to="/signIn"
+            color="secondary"
+            renderAs={Link}
+            text={"Sign in"}
+            size={"small"}
+          />
+        </Grid>
       </Grid>
     </BaseBody>
   );

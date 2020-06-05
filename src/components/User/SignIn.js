@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const signUp = (props) => {
+const signIn = () => {
   const classes = useStyles();
-
   return (
     <BaseBody>
       <Container component="main" maxWidth="xs">
@@ -42,29 +41,6 @@ const signUp = (props) => {
           </Typography>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -88,18 +64,6 @@ const signUp = (props) => {
                   autoComplete="current-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="verifiedPassword"
-                  label="Confirm your password"
-                  type="password"
-                  id="verifiedPassword"
-                  autoComplete="current-password"
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -108,14 +72,14 @@ const signUp = (props) => {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Sign In
             </Button>
           </form>
-          <h4>Do you have an account? &nbsp; <Link to="/signIn">Sign in</Link></h4>
+          <h4>Don't have an account? &nbsp; <Link to="/signUp">Sign Up</Link></h4>
         </div>
       </Container>
     </BaseBody>
   );
-};
+}
 
-export default signUp;
+export default signIn;

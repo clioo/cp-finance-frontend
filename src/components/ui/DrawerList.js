@@ -16,8 +16,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 
 const drawerList = (props) => {
-  console.log(props)
-
   const loggedItems = [
     {
       text: "New Expense",
@@ -53,7 +51,7 @@ const drawerList = (props) => {
     },
     {
       text: "Sign In",
-      linkTo: 'signIn',
+      linkTo: '/signIn',
       icon: VpnKeyIcon
     }
   ]
@@ -64,8 +62,9 @@ const drawerList = (props) => {
         button
         key={"drawerItem-" + index.toString()}
         index={index}
-        selected={props.selectedItemIndex === index || item.linkTo === props.currentLocation}
-        onClick={props.handleListItemClick.bind(this, index)}
+        // props.selectedItemIndex === index ||
+        selected={item.linkTo === props.currentLocation}
+        onClick={props.handleListItemClick.bind(this, item, index)}
       >
         <ListItemIcon>{React.createElement(item.icon)}</ListItemIcon>
         <ListItemText primary={item.text} />

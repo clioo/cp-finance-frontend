@@ -1,60 +1,58 @@
-import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Logo from './Logo';
-import { Divider } from '@material-ui/core';
+import React from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Logo from "./Logo";
+import { Link } from "react-router-dom";
+import { Divider } from "@material-ui/core";
 //Icons
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import ListIcon from '@material-ui/icons/List';
-import EditIcon from '@material-ui/icons/Edit';
-
-
-
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import ListIcon from "@material-ui/icons/List";
+import EditIcon from "@material-ui/icons/Edit";
 
 const drawerList = (props) => {
   const loggedItems = [
     {
       text: "New Expense",
-      icon: AddCircleOutlineIcon
+      icon: AddCircleOutlineIcon,
     },
     {
       text: "New Income",
-      icon: AddCircleOutlineIcon
+      icon: AddCircleOutlineIcon,
     },
     {
       text: "Expenses List",
-      icon: ListIcon
+      icon: ListIcon,
     },
     {
       text: "Incomes List",
-      icon: ListIcon
+      icon: ListIcon,
     },
     {
       text: "Month budget",
-      icon: EditIcon
+      icon: EditIcon,
     },
     {
       text: "Annual budget",
-      icon: EditIcon
-    }
+      icon: EditIcon,
+    },
   ];
 
   const notLoggedInItems = [
     {
       text: "Sign Up",
-      linkTo: '/signUp',
-      icon: PersonAddIcon
+      linkTo: "/signUp",
+      icon: PersonAddIcon,
     },
     {
       text: "Sign In",
-      linkTo: '/signIn',
-      icon: VpnKeyIcon
-    }
-  ]
+      linkTo: "/signIn",
+      icon: VpnKeyIcon,
+    },
+  ];
 
   const items = (props.isUserLogged ? loggedItems : notLoggedInItems).map(
     (item, index) => (
@@ -79,12 +77,14 @@ const drawerList = (props) => {
       onKeyDown={props.toggleDrawer(false)}
     >
       <List>
-        <Logo height="7em" />
+        <Link to="/">
+          <Logo height="7em" />
+        </Link>
         <Divider />
         {items}
       </List>
     </div>
   );
-}
+};
 
 export default drawerList;

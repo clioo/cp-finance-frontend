@@ -6,9 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-import DrawerList from "./DrawerList";
-import Logo from "./Logo";
-import ElevationScroll from "./ElevationScroll";
+import DrawerList from "../components/ui/DrawerList";
+import Logo from "../components/ui/Logo";
+import ElevationScroll from "../components/ui/ElevationScroll";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -55,7 +55,7 @@ const header = (props) => {
 
   const handleListItemClick = (item, index) => {
     selectedIndex = index;
-    history.push(item.linkTo);
+    props.redirectMethod(item.linkTo);
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -64,7 +64,7 @@ const header = (props) => {
     } else {
       // Need to avoid to spam the stach
       if (history.location.pathname === "/signUp") return;
-      history.push("/signUp");
+      props.redirectMethod("/signUp");
     }
   };
 

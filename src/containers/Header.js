@@ -13,7 +13,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 //Create a css file
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,7 @@ const header = (props) => {
 
   const handleListItemClick = (item, index) => {
     selectedIndex = index;
-    props.redirectMethod(item.linkTo);
+    props.redirectMethod(item.to);
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -83,8 +84,7 @@ const header = (props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -108,15 +108,17 @@ const header = (props) => {
               open={state.left}
               onClose={toggleDrawer(false)}
             >
-              <DrawerList
-                isUserLogged={props.isUserLogged}
-                toggleDrawer={toggleDrawer}
-                handleListItemClick={handleListItemClick.bind(
-                  state.selectedIndex
-                )}
-                selectedItemIndex={state.selectedIndex}
-                currentLocation={history.location.pathname}
-              />
+              <BrowserRouter>
+                <DrawerList
+                  isUserLogged={props.isUserLogged}
+                  toggleDrawer={toggleDrawer}
+                  handleListItemClick={handleListItemClick.bind(
+                    state.selectedIndex
+                  )}
+                  selectedItemIndex={state.selectedIndex}
+                  currentLocation={history.location.pathname}
+                />
+              </BrowserRouter>
             </Drawer>
 
             <Typography variant="h6" className={classes.title}>

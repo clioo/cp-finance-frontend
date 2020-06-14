@@ -6,7 +6,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import BaseBody from "./BaseBody";
 
-const notLoggedBody = () => {
+const notLoggedBody = (props) => {
+
   return (
     <BaseBody>
       <Typography variant="h2" component="h1" gutterBottom>

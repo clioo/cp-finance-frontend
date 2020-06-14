@@ -13,10 +13,12 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ListIcon from "@material-ui/icons/List";
 import EditIcon from "@material-ui/icons/Edit";
 
+
 const drawerList = (props) => {
   const loggedItems = [
     {
       text: "New Expense",
+      to: "/newExpense",
       icon: AddCircleOutlineIcon,
     },
     {
@@ -44,12 +46,12 @@ const drawerList = (props) => {
   const notLoggedInItems = [
     {
       text: "Sign Up",
-      linkTo: "/signUp",
+      to: "/signUp",
       icon: PersonAddIcon,
     },
     {
       text: "Sign In",
-      linkTo: "/signIn",
+      to: "/signIn",
       icon: VpnKeyIcon,
     },
   ];
@@ -57,15 +59,15 @@ const drawerList = (props) => {
   const items = (props.isUserLogged ? loggedItems : notLoggedInItems).map(
     (item, index) => (
       <ListItem
+        to={item.to}
         button
         key={"drawerItem-" + index.toString()}
         index={index}
-        // props.selectedItemIndex === index ||
-        selected={item.linkTo === props.currentLocation}
+        selected={item.to === props.currentLocation}
         onClick={props.handleListItemClick.bind(this, item, index)}
       >
-        <ListItemIcon>{React.createElement(item.icon)}</ListItemIcon>
-        <ListItemText primary={item.text} />
+          <ListItemIcon>{React.createElement(item.icon)}</ListItemIcon>
+          <ListItemText primary={item.text} />
       </ListItem>
     )
   );
@@ -81,6 +83,7 @@ const drawerList = (props) => {
           <Logo height="7em" />
         </Link>
         <Divider />
+
         {items}
       </List>
     </div>
